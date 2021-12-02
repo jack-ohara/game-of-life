@@ -2,19 +2,21 @@
   import { onDestroy } from 'svelte/internal';
   import { rows, columns } from './board-store';
   import Cell from './cell.svelte';
-  import type { CellInfo } from './global';
 
   let row_count;
   let column_count;
 
-  let cells: CellInfo[] = [];
+  let board: boolean[][] = [];
 
   let reconstructCells = () => {
-    cells = [];
+    board = [];
 
     for (let y in [...Array(row_count)]) {
+      // Add a new row into the board
+      board.push([]);
       for (let x in [...Array(column_count)]) {
-        cells.push({ coordinates: { x: parseInt(x), y: parseInt(y) }, isAlive: false });
+        // Populate a cell in the row
+        board[y].push(false);
       }
     }
   };
@@ -33,8 +35,10 @@
 </script>
 
 <div class="game-of-life-board">
-  {#each cells as c}
-    <Cell onClick={() => (c.isAlive = !c.isAlive)} cellInfo={c} />
+  {#each board as row}
+    {#each row as cellIsAlive}
+      <Cell onClick={() => (cellIsAlive = !cellIsAlive)} isAlive={cellIsAlive} />
+    {/each}
   {/each}
 </div>
 

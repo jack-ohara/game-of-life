@@ -1,12 +1,10 @@
 <script lang="ts">
-  import type { CellInfo } from './global';
-
   export let onClick: () => void;
-  export let cellInfo: CellInfo;
+  export let isAlive: boolean;
 </script>
 
 <div class="game-of-life-cell" on:click={onClick} tabindex="0">
-  <div class={cellInfo.isAlive ? 'alive' : ''} />
+  <div class={isAlive ? 'alive' : ''} />
 </div>
 
 <style>
@@ -21,6 +19,7 @@
 
   .game-of-life-cell > div {
     flex-grow: 1;
+    border-radius: 4px;
   }
 
   .game-of-life-cell > div.alive {
