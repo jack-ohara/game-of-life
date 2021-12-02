@@ -1,10 +1,11 @@
 <script lang="ts">
-  export let cells = 4;
+  import { rows, columns } from './board-store';
+  import Cell from './cell.svelte';
 </script>
 
 <div class="game-of-life-board">
-  {#each new Array(cells) as _}
-    <div class="game-of-life-cell" />
+  {#each new Array($rows * $columns) as _, idx}
+    <Cell onClick={() => alert(`Cell ${idx} clicked!`)} />
   {/each}
 </div>
 
@@ -17,10 +18,5 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
-  }
-
-  .game-of-life-board .game-of-life-cell {
-    border: 1px solid grey;
-    height: 100%;
   }
 </style>
