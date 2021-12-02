@@ -1,8 +1,6 @@
 <script lang="ts">
   import BoardSetup from '../board-setup.svelte';
   import Board from '../board.svelte';
-
-  let cells = 4;
 </script>
 
 <main>
